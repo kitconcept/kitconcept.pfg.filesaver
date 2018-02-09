@@ -1,12 +1,22 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="kitconcept.pfg.filesaver">
 
-  <i18n:registerTranslations directory="locales" />
-
   <includeDependencies package="." />
+
+  <!-- <include package="Products.CMFCore" /> -->
+  <class class=".fileDataAdapter.FileDataAdapter"/>
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+
+  <!-- <five:deprecatedManageAddDelete
+      class=".fileDataAdapter.FileDataAdapter" /> -->
+
+  <i18n:registerTranslations directory="locales" />
 
   <include package=".browser" />
 

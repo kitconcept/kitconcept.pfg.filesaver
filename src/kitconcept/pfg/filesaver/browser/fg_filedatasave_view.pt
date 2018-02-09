@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+<metal:javascript_head metal:fill-slot="javascript_head_slot">
+<script type="text/javascript" charset="utf-8">
+  jQuery(function ($) {
+      $('#clearSavedFormInput').click(function () {
+          return confirm($.trim($('#clear-saved-input-confirm').html()));
+      });
+  });
+</script>
+</metal:javascript_head>
+
+<body>
+  <metal:content-core fill-slot="content-core" tal:define="view context/@@plone_context_state">
+    <metal:block define-macro="content-core"
+           tal:define="content_type here/get_content_type|here/Format;
+                       canEdit python:checkPermission('Modify portal content', here);
+                      ">
+
+
+    </metal:block>
+  </metal:content-core>
+</body>
+</html>
