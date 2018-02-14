@@ -17,4 +17,11 @@
       directory="static"
       />
 
+  <browser:page
+    name="view"
+    for="kitconcept.pfg.filesaver.interfaces.IFileDataAdapter"
+    template="fg_filedatasave_view.pt"
+    permission="zope2.View"
+    />
+
 </configure>

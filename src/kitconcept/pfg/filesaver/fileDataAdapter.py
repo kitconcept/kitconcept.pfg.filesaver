@@ -18,6 +18,8 @@ from Products.PloneFormGen.content.actionAdapter import \
 from plone.dexterity.utils import createContentInContainer
 from plone.app.dexterity.interfaces import IDXFileFactory
 from ZPublisher.HTTPRequest import FileUpload
+from .interfaces import IFileDataAdapter
+from zope.interface import implements
 
 import logging
 import transaction
@@ -29,6 +31,7 @@ logger = logging.getLogger("PloneFormGen")
 class FileDataAdapter(FormActionAdapter):
     """A form action adapter that will save form input data and
        return it in csv- or tab-delimited format."""
+    implements(IFileDataAdapter)
 
     schema = FormAdapterSchema.copy()
 
@@ -51,7 +54,6 @@ class FileDataAdapter(FormActionAdapter):
         # """
         for f in fields:
             if f.isFileField():
-                import pdb; pdb.set_trace()
                 file_folder = self.get_file_folder()
                 factory = IDXFileFactory(file_folder)
                 file = REQUEST.form.get('%s_file' % f.fgField.getName())

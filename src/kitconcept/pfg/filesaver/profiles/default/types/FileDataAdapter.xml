@@ -11,14 +11,14 @@
  <property name="content_meta_type">FileDataAdapter</property>
  <property name="product">kitconcept.pfg.filesaver</property>
  <property name="factory">addFileDataAdapter</property>
- <property name="immediate_view">fg_filedatasave_view</property>
+ <property name="immediate_view">view</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types"/>
  <property name="allow_discussion">False</property>
- <property name="default_view">fg_filedatasave_view</property>
+ <property name="default_view">view</property>
  <property name="view_methods">
-  <element value="fg_filedatasave_view"/>
+  <element value="view"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
