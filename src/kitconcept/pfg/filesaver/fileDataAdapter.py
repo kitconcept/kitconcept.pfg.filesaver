@@ -1,25 +1,16 @@
 """ A form action adapter that saves form submissions for download """
-
-from plone import api
-from AccessControl import ClassSecurityInfo
-
-from zope.contenttype import guess_content_type
-
-from Products.CMFCore.permissions import ModifyPortalContent
-
-from Products.Archetypes.public import *
-from Products.ATContentTypes.content.base import registerATCT
-
-from Products.PloneFormGen import PloneFormGenMessageFactory as _
 from .config import PROJECTNAME
-from Products.PloneFormGen.content.actionAdapter import \
-    FormActionAdapter, FormAdapterSchema
-
-from plone.dexterity.utils import createContentInContainer
-from plone.app.dexterity.interfaces import IDXFileFactory
-from ZPublisher.HTTPRequest import FileUpload
 from .interfaces import IFileDataAdapter
+from AccessControl import ClassSecurityInfo
+from plone.app.dexterity.interfaces import IDXFileFactory
+from plone.dexterity.utils import createContentInContainer
+from Products.Archetypes.public import *  # noqa
+from Products.ATContentTypes.content.base import registerATCT
+from Products.PloneFormGen.content.actionAdapter import FormActionAdapter
+from Products.PloneFormGen.content.actionAdapter import FormAdapterSchema
+from zope.contenttype import guess_content_type
 from zope.interface import implements
+from ZPublisher.HTTPRequest import FileUpload
 
 import logging
 import transaction
@@ -37,18 +28,18 @@ class FileDataAdapter(FormActionAdapter):
 
     schema.moveField('execCondition', pos='bottom')
 
-    meta_type      = 'FileDataAdapter'
-    portal_type    = 'FileDataAdapter'
+    meta_type = 'FileDataAdapter'
+    portal_type = 'FileDataAdapter'
     archetype_name = 'File Data Adapter'
 
     immediate_view = 'fg_filedatasave_view'
-    default_view   = 'fg_filedatasave_view'
+    default_view = 'fg_filedatasave_view'
 
-    security       = ClassSecurityInfo()
+    security = ClassSecurityInfo()
 
 
-    security.declarePrivate('onSuccess')
-    def onSuccess(self, fields, REQUEST=None, loopstop=False):
+    security.declarePrivate('onSuccess')  # noqa
+    def onSuccess(self, fields, REQUEST=None, loopstop=False): # noqa
         # """
         # saves data.
         # """
@@ -63,7 +54,7 @@ class FileDataAdapter(FormActionAdapter):
                     filename = file.filename
                     mimetype, enc = guess_content_type(filename, fdata, None)
 
-                    obj = factory(filename, mimetype, fdata)
+                    factory(filename, mimetype, fdata)
 
     def get_file_folder(self):
         if not self.aq_parent.get('files', False):
